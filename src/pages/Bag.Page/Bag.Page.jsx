@@ -62,8 +62,6 @@ const BagPage = () => {
     });
   };
 
-
-
   const handleDeleteAll = () => {
     console.log(`Deleting items: ${Array.from(selectedItems).join(", ")}`);
     const updatedRes = res.filter((item) => !selectedItems.has(item.prod_id));
