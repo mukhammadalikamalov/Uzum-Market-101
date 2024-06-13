@@ -26,23 +26,22 @@ const Media = () => {
         </Stack>
       </Box>
       <Box paddingTop={"80px"}>
-        <Box bgcolor={"blue"} width={"100%"} height={"600px"}>
-        </Box>
+        <Box bgcolor={"blue"} width={"100%"} height={"600px"}></Box>
       </Box>
       <Box>
-        <Stack direction={"row"} gap={20} justifyContent={"center"}>
-          <Box bgcolor={"lightseagreen"} width={"200px"} height={"200px"} borderRadius={"100%"} marginTop={"400px"} marginBottom={"200px"} alignItems={"center"} justifyContent={"center"}></Box>
-          <Box bgcolor={"lightseagreen"} width={"200px"} height={"200px"} borderRadius={"100%"} marginTop={"400px"} marginBottom={"200px"} alignItems={"center"} justifyContent={"center"}></Box>
-          <Box bgcolor={"lightseagreen"} width={"200px"} height={"200px"} borderRadius={"100%"} marginTop={"400px"} marginBottom={"200px"} alignItems={"center"} justifyContent={"center"}></Box>
+        <Stack direction={{ xs: "column", md: "row" }} gap={{ xs: 4, md: 20 }} justifyContent={"center"}>
+          {Array.from({ length: 3 }).map((_, index) => (
+            <Box key={index} bgcolor={"lightseagreen"} width={"200px"} height={"200px"} borderRadius={"100%"} my={{ xs: 4, md: 8 }} alignItems={"center"} justifyContent={"center"}></Box>
+          ))}
         </Stack>
       </Box>
       <Box marginY={4}>
-        <Stack direction={"row"} gap={4} justifyContent={"center"} alignItems={"center"} marginBottom={"400px"} marginTop={"300px"}>
+        <Stack direction={{ xs: "column", md: "row" }} gap={4} justifyContent={"center"} alignItems={"center"} my={{ xs: 8, md: 12 }}>
           <Typography variant='h5' width={"900px"}>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ipsa, repudiandae doloremque tempore consequuntur totam ducimus deserunt debitis vel veritatis architecto corrupti, itaque sapiente! Nulla eius aliquam hic, beatae adipisci velit! Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ipsa, repudiandae doloremque tempore consequuntur totam ducimus deserunt debitis vel veritatis architecto corrupti, itaque sapiente! Nulla eius aliquam hic, beatae adipisci velit!</Typography>
           <Box bgcolor={"lightseagreen"} width={"200px"} height={"200px"} borderRadius={"100%"}></Box>
         </Stack>
       </Box>
-	  <Box paddingTop={"80px"} marginBottom={"200px"}>
+      <Box paddingTop={"80px"} mb={{ xs: 8, md: 20 }}>
         <Grid container spacing={2} padding={2}>
           {Array.from(Array(10).keys()).map((index) => (
             <Grid item xs={12} sm={6} md={4} lg={3} key={index}>

@@ -366,7 +366,7 @@
         "https://img.mvideo.ru/Big/30062852bb.jpg"
       ],
       "type": "PC",
-      "status": false
+      "status": true
     },
     {
       "id": "14",
@@ -404,7 +404,7 @@
         "https://img.mvideo.ru/Big/30058010bb2.jpg"
       ],
       "type": "PC",
-      "status": false
+      "status": true
     },
     {
       "id": "16",
@@ -423,7 +423,7 @@
         "https://img.mvideo.ru/Big/30057855bb4.jpg"
       ],
       "type": "PC",
-      "status": false
+      "status": true
     },
     {
       "id": "17",
@@ -442,7 +442,7 @@
         "https://img.mvideo.ru/Big/30043369bb4.jpg"
       ],
       "type": "PC",
-      "status": 0
+      "status": true
     },
     {
       "id": "18",
@@ -480,7 +480,7 @@
         "https://img.mvideo.ru/Big/30026741bb7.jpg"
       ],
       "type": "PC",
-      "status": false
+      "status": true
     },
     {
       "id": "20",

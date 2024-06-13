@@ -2,10 +2,13 @@ import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlin
 import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import { AppBar, Backdrop, Box, Button, InputBase, Modal, TextField, Toolbar, Typography, styled } from "@mui/material";
+import Stack from "@mui/material/Stack";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import customIcon from "../Layout/image.jpg";
+import GetGoods from "../../hooks/getGoods";
 import searchContext from "../../modules/context/searchContext";
+import customIcon from "../Layout/image.jpg";
+import BagModal from "./BagModal";
 import SearchInput from "./searchInput";
 
 const Search = styled("div")(({ theme }) => ({
@@ -110,143 +113,169 @@ const SecondNavBarButton = styled("div")(({ theme }) => ({
 
 export default function SearchAppBar() {
   const [open, setOpen] = useState(false);
-  const [searchText, setSearchText] = useState('')
+  const [searchText, setSearchText] = useState("");
+  const [isShown, setIsShown] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
+  const { res } = GetGoods();
 
   const changeSearchText = (text) => {
-    setSearchText(text)
-  }
+    setSearchText(text);
+  };
 
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
   return (
     <searchContext.Provider value={{ searchText, changeSearchText }}>
-    <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static" sx={{ bgcolor: "white", color: "black", boxShadow: "none" }}>
-        <Toolbar sx={{ justifyContent: "space-between", flexWrap: "nowrap" }}>
-          <Box sx={{ display: "flex", alignItems: "center" }}>
-            <Link to={"/"}>
-              <Logo alt="Custom Icon" src={customIcon} />
-            </Link>
+      <Box sx={{ flexGrow: 1 }}>
+        <AppBar position="static" sx={{ bgcolor: "white", color: "black", boxShadow: "none" }}>
+          <Toolbar sx={{ justifyContent: "space-between", flexWrap: "nowrap" }}>
+            <Box sx={{ display: "flex", alignItems: "center" }}>
+              <Link to={"/"}>
+                <Logo alt="Custom Icon" src={customIcon} />
+              </Link>
 
-            <NavBarButton
-              sx={{
-                width: "100px",
-                bgcolor: "#F0F8FF",
-                height: "6vh",
-                textAlign: "center",
-                color: "gray", // Setting navbar button color to gray
-                borderRadius: "10px",
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                fontSize: "17px",
-                color: "Darkviolet",
-              }}
-            >
-              Katalog
-            </NavBarButton>
-          </Box>
-              <SearchInput/>
-          
-         
-
-
-          {/* <Search>
-            
-          </Search> */}
-        
-
-         
-          <NavBarButton>
-            <PersonOutlinedIcon />
-            <ButtonText onClick={handleOpen} variant="body1">
-              Kirish
-            </ButtonText>
-            <Modal
-              open={open}
-              onClose={handleClose}
-              aria-labelledby="modal-modal-title"
-              aria-describedby="modal-modal-description"
-              BackdropComponent={Backdrop}
-              BackdropProps={{
-                sx: { backdropFilter: "blur(1px)" }, // Add blur effect to the backdrop
-              }}
-            >
-              <Box
+              <NavBarButton
                 sx={{
-                  position: "absolute",
-                  top: "50%",
-                  left: "50%",
-                  transform: "translate(-50%, -50%)",
-                  backgroundColor: "white",
-                  borderRadius: "15px",
-                  boxShadow: "0px 0px 10px rgba(0, 0, 0, 0.1)",
-                  width: "25%",
-                  height: "55vh",
-                  padding: "1%", // Add padding for better spacing
+                  width: "100px",
+                  bgcolor: "#F0F8FF",
+                  height: "6vh",
                   textAlign: "center",
-                  paddingTop: "5%",
+                  color: "gray", // Setting navbar button color to gray
+                  borderRadius: "10px",
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  fontSize: "17px",
+                  color: "Darkviolet",
                 }}
               >
-                <Typography id="modal-modal-title" variant="h5" component="h2">
-                  Telefon raqamini kiriting
-                </Typography>
-                <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                  Tasdiqlash kodini SMS orqali yuboramiz
-                </Typography>
+                Katalog
+              </NavBarButton>
+            </Box>
+            <SearchInput />
 
-                {/* Telephone Input */}
-                <TextField
-                  placeholder="+998 00 000-00-00"
-                  variant="outlined"
-                  sx={{ mt: 2, width: "90%", height: "4vh" }} // Adjusted height to 4vh
-                />
+            {/* <Search>
+            
+          </Search> */}
 
-                <Button variant="contained" sx={{ mt: 6, width: "90%", bgcolor: "#8A2BE2" }}>
-                  Kodni Olish
-                </Button>
-
-                <Typography sx={{ mt: 6, fontSize: "0.885rem", width: "95%" }}>
-                  Avtotizatsiyadan o'tish orqali siz shaxsiy ma'lumotlarni qayta ishlash siyosatiga rozilik bildirasiz
-                </Typography>
-              </Box>
-            </Modal>
-          </NavBarButton>
-          
-          <Link to="/favorites" style={{ textDecoration: "none" }}>
             <NavBarButton>
-              <FavoriteBorderOutlinedIcon />
-              <ButtonText variant="body1">Saralangan</ButtonText>
+              <PersonOutlinedIcon />
+              <ButtonText onClick={handleOpen} variant="body1">
+                Kirish
+              </ButtonText>
+              <Modal
+                open={open}
+                onClose={handleClose}
+                aria-labelledby="modal-modal-title"
+                aria-describedby="modal-modal-description"
+                BackdropComponent={Backdrop}
+                BackdropProps={{
+                  sx: { backdropFilter: "blur(1px)" }, // Add blur effect to the backdrop
+                }}
+              >
+                <Box
+                  sx={{
+                    position: "absolute",
+                    top: "50%",
+                    left: "50%",
+                    transform: "translate(-50%, -50%)",
+                    backgroundColor: "white",
+                    borderRadius: "15px",
+                    boxShadow: "0px 0px 10px rgba(0, 0, 0, 0.1)",
+                    width: "25%",
+                    height: "55vh",
+                    padding: "1%", // Add padding for better spacing
+                    textAlign: "center",
+                    paddingTop: "5%",
+                  }}
+                >
+                  <Typography id="modal-modal-title" variant="h5" component="h2">
+                    Telefon raqamini kiriting
+                  </Typography>
+                  <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+                    Tasdiqlash kodini SMS orqali yuboramiz
+                  </Typography>
+
+                  {/* Telephone Input */}
+                  <TextField
+                    placeholder="+998 00 000-00-00"
+                    variant="outlined"
+                    sx={{ mt: 2, width: "90%", height: "4vh" }} // Adjusted height to 4vh
+                  />
+
+                  <Button variant="contained" sx={{ mt: 6, width: "90%", bgcolor: "#8A2BE2" }}>
+                    Kodni Olish
+                  </Button>
+
+                  <Typography sx={{ mt: 6, fontSize: "0.885rem", width: "95%" }}>
+                    Avtotizatsiyadan o'tish orqali siz shaxsiy ma'lumotlarni qayta ishlash siyosatiga rozilik bildirasiz
+                  </Typography>
+                </Box>
+              </Modal>
             </NavBarButton>
-          </Link>
-          <Link to="/bag" style={{ textDecoration: "none" }}>
-            <NavBarButton>
-              <ShoppingCartOutlinedIcon />
-              <ButtonText variant="body1">Savat</ButtonText>
-            </NavBarButton>
-          </Link>
-        </Toolbar>
-        <Box
-          sx={{
-            display: "flex",
-            alignItems: "center",
-            flexWrap: "wrap",
-            gap: "25px",
-            paddingLeft: "2%",
-            marginBottom: "1px",
-          }}
-        >
-          {names.map((name, index) => (
-            <SecondNavBarButton key={index}>
-              <Typography sx={{ color: "gray" }} variant="body1">
-                {name}
-              </Typography>
-            </SecondNavBarButton>
-          ))}
-        </Box>
-      </AppBar>
-    </Box>
+
+            <Link to="/favorites" style={{ textDecoration: "none" }}>
+              <NavBarButton>
+                <FavoriteBorderOutlinedIcon />
+                <ButtonText variant="body1">Saralangan</ButtonText>
+              </NavBarButton>
+            </Link>
+            <Stack
+              onMouseEnter={() => setIsShown(true)}
+              onMouseLeave={() => setIsShown(false)}
+              sx={{
+                height: "40px",
+                width: "100px",
+                ":hover": { bgcolor: "red" },
+                position: "relative",
+                alignItems: "center",
+              }}
+            >
+              <Link to="/bag" style={{ textDecoration: "none" }}>
+                <NavBarButton>
+                  <ShoppingCartOutlinedIcon />
+                  <ButtonText variant="body1">Savat {res.length}</ButtonText>
+                </NavBarButton>
+              </Link>
+              {isShown && res.length >= 1 && (
+                <Box style={{ position: "absolute", bottom: 0, left: "-207%" }}>
+                  <Box
+                    sx={{
+                      position: "absolute",
+                      zIndex: "40",
+                      display: "flex",
+                      width: "510px",
+                      backgroundColor: "#fff",
+                      flexDirection: "column",
+                    }}
+                  >
+                    {res && res.map((item) => <BagModal key={item.id} item={item}></BagModal>)}
+                  </Box>
+                </Box>
+              )}
+            </Stack>
+          </Toolbar>
+          <Box
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              flexWrap: "wrap",
+              gap: "25px",
+              paddingLeft: "2%",
+              marginBottom: "1px",
+            }}
+          >
+            {names.map((name, index) => (
+              <SecondNavBarButton key={index}>
+                <Typography sx={{ color: "gray" }} variant="body1">
+                  {name}
+                </Typography>
+              </SecondNavBarButton>
+            ))}
+          </Box>
+        </AppBar>
+      </Box>
     </searchContext.Provider>
   );
 }
